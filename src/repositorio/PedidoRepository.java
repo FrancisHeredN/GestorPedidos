@@ -3,16 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package repositorio;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 /**
  *
  * @author PC
  */
 public class PedidoRepository {
-     private Connection conexion;
+
+    private Connection conexion;
 
     public PedidoRepository() {
 
@@ -35,11 +38,11 @@ public class PedidoRepository {
 
         try {
 
-            String sql =
-                    "INSERT INTO pedidos(cliente,total) VALUES (?,?)";
+            String sql
+                    = "INSERT INTO pedidos(cliente,total) VALUES (?,?)";
 
-            PreparedStatement ps =
-                    conexion.prepareStatement(sql);
+            PreparedStatement ps
+                    = conexion.prepareStatement(sql);
 
             ps.setString(1, cliente);
             ps.setDouble(2, total);
@@ -58,11 +61,11 @@ public class PedidoRepository {
 
         try {
 
-            String sql =
-                    "DELETE FROM pedidos WHERE id=?";
+            String sql
+                    = "DELETE FROM pedidos WHERE id=?";
 
-            PreparedStatement ps =
-                    conexion.prepareStatement(sql);
+            PreparedStatement ps
+                    = conexion.prepareStatement(sql);
 
             ps.setInt(1, idPedido);
 
