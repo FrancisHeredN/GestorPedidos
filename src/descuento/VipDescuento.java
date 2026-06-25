@@ -8,9 +8,11 @@ package descuento;
  *
  * @author PC
  */
-public class VipDescuento {
+public class VipDescuento implements DescuentoStrategy {
 
-    @Override
+    public VipDescuento() {
+    }
+
     public double calcular(double subtotal) {
         return subtotal * 0.20;
     }

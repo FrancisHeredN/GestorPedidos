@@ -7,12 +7,14 @@ import descuento.DescuentoStrategy;
 import descuento.FabricaDescuentos;
 import modelo.Pedido;
 
+
 /**
  *
  * @author PC
  */
 public class CalculadoraPedido {
-     private final FabricaDescuentos fabrica;
+    
+    private final FabricaDescuentos fabrica;
 
     public CalculadoraPedido() {
         fabrica = new FabricaDescuentos();
@@ -55,8 +57,7 @@ public class CalculadoraPedido {
                 calcularDescuento(pedido);
 
         double impuesto =
-                calcularImpuesto(subtotal,
-                        descuento);
+                calcularImpuesto(subtotal, descuento);
 
         return subtotal - descuento + impuesto;
     }

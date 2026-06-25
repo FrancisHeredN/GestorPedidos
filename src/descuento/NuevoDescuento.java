@@ -8,7 +8,8 @@ package descuento;
  *
  * @author PC
  */
-public class NuevoDescuento {
+public class NuevoDescuento implements DescuentoStrategy {
+
 
     @Override
     public double calcular(double subtotal) {

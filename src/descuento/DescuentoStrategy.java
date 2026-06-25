@@ -8,10 +8,8 @@ package descuento;
  *
  * @author PC
  */
-public class RegularDescuento implements DescuentoStrategy {
+public interface DescuentoStrategy {
 
-    @Override
-    public double calcular(double subtotal) {
-        return subtotal * 0.05;
-    }
+    double calcular(double subtotal);
+
 }

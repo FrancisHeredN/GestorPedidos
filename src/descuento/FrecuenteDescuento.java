@@ -8,9 +8,9 @@ package descuento;
  *
  * @author PC
  */
-public class FrecuenteDescuento {
+public class FrecuenteDescuento implements DescuentoStrategy {
 
-    @Override
+ 
     public double calcular(double subtotal) {
         return subtotal * 0.10;
     }

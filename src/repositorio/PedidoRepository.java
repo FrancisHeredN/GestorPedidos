@@ -17,65 +17,70 @@ public class PedidoRepository {
 
     private Connection conexion;
 
-    public PedidoRepository() {
-
+   public PedidoRepository() {
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/tienda",
+                    "jdbc:mysql://localhost:3306/gestorpedidos",
                     "root",
-                    "admin123");
+                    ""
+            );
+            System.out.println("Conexión exitosa");
 
-        } catch (SQLException e) {
-
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("ERROR CONEXIÓN: " + e.getMessage());
+            conexion = null;
         }
     }
 
-    public void guardarPedido(
-            String cliente,
-            double total) {
+    public void guardarPedido(String cliente, double total) {
+
+        if (conexion == null) {
+            System.out.println("No hay conexión a la base de datos");
+            return;
+        }
 
         try {
+            String sql =
+                    "INSERT INTO pedidos(cliente,total) VALUES (?,?)";
 
-            String sql
-                    = "INSERT INTO pedidos(cliente,total) VALUES (?,?)";
-
-            PreparedStatement ps
-                    = conexion.prepareStatement(sql);
+            PreparedStatement ps = conexion.prepareStatement(sql);
 
             ps.setString(1, cliente);
             ps.setDouble(2, total);
 
             ps.executeUpdate();
 
-        } catch (SQLException e) {
+            System.out.println("Pedido guardado");
 
-            System.out.println(
-                    "Error al guardar: "
-                    + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error al guardar: " + e.getMessage());
         }
     }
 
     public void cancelarPedido(int idPedido) {
 
+        if (conexion == null) {
+            System.out.println("No hay conexión a la base de datos");
+            return;
+        }
+
         try {
+            String sql =
+                    "DELETE FROM pedidos WHERE id=?";
 
-            String sql
-                    = "DELETE FROM pedidos WHERE id=?";
-
-            PreparedStatement ps
-                    = conexion.prepareStatement(sql);
+            PreparedStatement ps = conexion.prepareStatement(sql);
 
             ps.setInt(1, idPedido);
 
             ps.executeUpdate();
 
-        } catch (SQLException e) {
+            System.out.println("Pedido cancelado");
 
-            System.out.println(
-                    "Error al cancelar: "
-                    + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error al cancelar: " + e.getMessage());
         }
     }
+    
 }
